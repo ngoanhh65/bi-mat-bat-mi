@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#b8e7b0">
-<title>19/11 — Một thế giới dành cho các bạn nam</title>
+<title>19/11 — Một thế giới nhỏ dành riêng cho bạn</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
 :root{--green:#65ad69;--deep:#276b4b;--blue:#6bbce5;--sky:#dff5ff;--yellow:#ffd65b;--red:#ef716b;--cream:#fff9e9;--ink:#294b43;--shadow:0 18px 45px #285b4920}
@@ -17,12 +17,12 @@
 <div class="sun"></div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div class="kite">🪁</div>
 <div class="hero-inner"><span class="eyebrow">🎈 MỘT NGÀY ĐẶC BIỆT ĐANG ĐỢI BẠN 🎈</span>
 <h1>Ơ kìa!<br><span>19/11</span> đây rồi!</h1>
-<p>Có một thế giới nhỏ xíu đang mở cửa dành riêng cho các bạn nam. Tụi mình không quên ngày của các bạn đâu nhé!</p>
+<p>Có một thế giới nhỏ xíu được chuẩn bị riêng cho những người đặc biệt hôm nay. Tụi mình vẫn nhớ ngày này và mong bạn sẽ có một nụ cười thật tươi nhé!</p>
 <button class="primary" onclick="enterWorld()">MỞ CÁNH CỬA BÍ MẬT ✨</button>
 <div class="scrollhint">KÉO XUỐNG KHÁM PHÁ THẾ GIỚI NÀY ↓</div></div>
 </header>
 <section class="section greeting" id="wish"><div class="wrap">
-<div class="section-head"><div class="kicker">✉️ Một chiếc phong thư bí mật</div><h2>Gửi những chàng trai tuyệt vời!</h2><p>Trong chiếc phong thư này có một lời nhắn nhỏ. Chạm vào con dấu để mở ra nhé!</p></div>
+<div class="section-head"><div class="kicker">✉️ Một chiếc phong thư bí mật</div><h2>Gửi những chàng trai đặc biệt!</h2><p>Trong chiếc phong thư này có một lời nhắn nhỏ. Chạm vào con dấu để mở ra nhé!</p></div>
 <div class="envelope-area"><div><div class="envelope" id="envelope" onclick="openEnvelope()" role="button" aria-label="Mở phong thư" tabindex="0">
 <div class="env-back"></div><div class="env-paper"><div><strong>Chúc mừng ngày 19/11!</strong><p>Chúc các bạn luôn vui vẻ, tự tin và giữ mãi những điều tốt đẹp trong tim. 💛</p><p>Cảm ơn vì đã là chính mình!</p></div></div><div class="env-flap"></div><div class="env-front"></div><div class="seal">★</div></div><div class="tap-note" id="envNote">👆 BẤM VÀO PHONG THƯ ĐỂ MỞ</div></div></div>
 </div></section>
@@ -39,7 +39,7 @@
 <div class="machine-controls"><div class="joystick"></div><button class="prize-btn" id="drawBtn" onclick="drawPrize()">NHẤN ĐỂ GẮP QUÀ! 🎁</button><div class="joystick"></div></div></div>
 <div class="prize-result" id="prizeResult"><p style="font-weight:900;color:#477a4b">🎟️ Vé tham gia đã sẵn sàng — thử vận may nào!</p></div>
 </div></section>
-<footer class="footer"><strong>🌈 Chúc mừng ngày Quốc tế Nam giới 19/11!</strong>Chúc các bạn luôn can đảm để thử, dịu dàng để thấu hiểu và vui vẻ để tận hưởng hành trình của mình.<br>Made with 💚 and a little bit of childhood magic.</footer>
+<footer class="footer"><strong>🌈 Chúc mừng ngày Quốc tế Nam giới 19/11!</strong>Chúc bạn luôn can đảm để thử, dịu dàng để thấu hiểu và vui vẻ để tận hưởng hành trình của mình.<br><span style="display:inline-block;margin-top:13px;color:#fff1b8">Một món quà nhỏ từ các bạn nữ PR &amp; ME – CLB PNM</span><br><span style="opacity:.8">Made with 💚 and a little bit of childhood magic.</span></footer>
 <script>
 const confetti=['✨','⭐','🌼','🍃','🎈','🎉','💛','💙'];
 function burst(x=innerWidth/2,y=innerHeight/2,count=34){for(let i=0;i<count;i++){const s=document.createElement('span');s.className='spark';s.textContent=confetti[Math.floor(Math.random()*confetti.length)];s.style.left=(x+(Math.random()-.5)*240)+'px';s.style.top=(y+(Math.random()-.5)*80)+'px';s.style.animationDelay=(Math.random()*.35)+'s';s.style.fontSize=(14+Math.random()*19)+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),2300)}}
