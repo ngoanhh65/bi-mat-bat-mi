@@ -46,6 +46,29 @@
 .cover-doodle{position:absolute;bottom:16px;font-size:12px;letter-spacing:3px;color:#a98b56;font-weight:1000}
 .message-sign em{font-style:normal;background:#f8efd9;border-radius:99px;padding:4px 10px;margin-top:5px;font-size:11px;letter-spacing:.2px}
 
+
+.sealed-letter{min-height:390px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:35px 22px;border-radius:8px;background:linear-gradient(145deg,#fff9eb,#f5e7c9);border:2px dashed #d9b66f;box-shadow:inset 0 0 30px #d4b66b22;animation:pageIn .35s ease both}
+.sealed-mark{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:#e87970;color:#fff;font-size:38px;box-shadow:0 5px 0 #bd5c56,0 0 0 9px #e8797022;margin-bottom:19px;animation:bob 2s infinite}
+.sealed-label{font-size:10px;letter-spacing:3px;color:#a17b46;font-weight:1000}
+.sealed-letter h3{font:800 clamp(26px,4vw,36px) 'Baloo 2';color:#397c66;margin:12px 0}
+.sealed-letter p{max-width:420px;color:#8b7959;font-weight:700;line-height:1.7;margin:0 0 22px}
+.sealed-spark{color:#d7aa57;letter-spacing:5px;margin-top:20px}
+.letter-page[data-color="0"]{background:#fff5e8;box-shadow:inset 0 0 0 2px #edc6a4}
+.letter-page[data-color="1"]{background:#f2f0ff;box-shadow:inset 0 0 0 2px #c9c2ed}
+.letter-page[data-color="2"]{background:#fff0f2;box-shadow:inset 0 0 0 2px #edc1cd}
+.letter-page[data-color="3"]{background:#eef8ff;box-shadow:inset 0 0 0 2px #b8d9ed}
+.letter-page[data-color="4"]{background:#f1f8e9;box-shadow:inset 0 0 0 2px #c8dfac}
+.letter-page[data-color="5"]{background:#fff8dc;box-shadow:inset 0 0 0 2px #e9d28c}
+.letter-page[data-color="6"]{background:#eaf7f3;box-shadow:inset 0 0 0 2px #b5d9cb}
+.letter-page[data-color="7"]{background:#fcefe4;box-shadow:inset 0 0 0 2px #e9c6a9}
+.letter-page[data-color="0"] .page-deco,.letter-page[data-color="0"] h3,.letter-page[data-color="0"] .message-sign strong{color:#a85f43}
+.letter-page[data-color="1"] .page-deco,.letter-page[data-color="1"] h3,.letter-page[data-color="1"] .message-sign strong{color:#7565aa}
+.letter-page[data-color="2"] .page-deco,.letter-page[data-color="2"] h3,.letter-page[data-color="2"] .message-sign strong{color:#bd657d}
+.letter-page[data-color="3"] .page-deco,.letter-page[data-color="3"] h3,.letter-page[data-color="3"] .message-sign strong{color:#4b86ad}
+.letter-page[data-color="4"] .page-deco,.letter-page[data-color="4"] h3,.letter-page[data-color="4"] .message-sign strong{color:#648a4d}
+.letter-page[data-color="5"] .page-deco,.letter-page[data-color="5"] h3,.letter-page[data-color="5"] .message-sign strong{color:#a98231}
+.letter-page[data-color="6"] .page-deco,.letter-page[data-color="6"] h3,.letter-page[data-color="6"] .message-sign strong{color:#4e8c79}
+.letter-page[data-color="7"] .page-deco,.letter-page[data-color="7"] h3,.letter-page[data-color="7"] .message-sign strong{color:#a76b48}
 </style>
 </head>
 <body>
@@ -77,11 +100,19 @@
  </div>
  <div id="bookInside" hidden>
   <div class="book-top"><span>✦ LITTLE BOOK OF WISHES ✦</span><span class="book-date">19 · 11</span></div>
-  <div class="letter-page" id="letterPage" aria-live="polite">
+  <div class="sealed-letter" id="sealedLetter">
+   <div class="sealed-mark">✉</div>
+   <div class="sealed-label">A LITTLE SECRET FOR YOU</div>
+   <h3>Ơ, trong này có gì vậy ta?</h3>
+   <p>Có một lời nhắn nhỏ đang được giữ kín bên trong chiếc phong thư này...</p>
+   <button class="page-btn" onclick="openCurrentLetter()">MỞ THƯ RA XEM NÀO 💌</button>
+   <div class="sealed-spark">✦　✿　✦</div>
+  </div>
+  <div class="letter-page" id="letterPage" aria-live="polite" hidden>
    <div class="page-deco">✉️ <span>THƯ GỬI BẠN</span> <span class="page-count" id="pageCount">01 / 08</span></div>
-   <h3 id="messageTitle">Gửi Đức và Khánh</h3>
+   <h3 id="messageTitle"></h3>
    <div class="message-body" id="messageBody"></div>
-   <div class="message-sign"><span>Thân mến,</span><strong id="messageFrom">Gia Phúc</strong><em id="messageExtra">Người con gái cute nhất Gen 14</em></div>
+   <div class="message-sign"><span>Thân mến,</span><strong id="messageFrom"></strong><em id="messageExtra"></em></div>
    <div class="page-flower">✿</div>
   </div>
   <div class="book-controls"><button class="page-btn" id="prevLetter" onclick="turnLetter(-1)">← Trang trước</button><span class="page-dots" id="pageDots">● ○ ○ ○ ○ ○ ○ ○</span><button class="page-btn" id="nextLetter" onclick="turnLetter(1)">Trang tiếp →</button></div>
@@ -101,8 +132,19 @@
 const wishes = [{"from":"Gia Phúc","title":"Gửi Đức và Khánh","body":"Nhân dịp 19/11, tui chúc Đức và Khánh luôn luôn mạnh khỏe, bình an, càng ngày càng học giỏi và đẹp trai nhe. Mong hai bạn nam của Gen 14 sẽ gặt hái được thật nhiều thành công, idea luôn dồi dào và viết caption thật mượt nhíee.","sign":"Người con gái cute nhất Gen 14"},{"from":"Phương Trang","sign":"Nàng thơ chuyên nhắc chuyện morat","title":"Gửi Minh Đức và Quốc Khánh","body":"Nhân ngày 19/11, chúc ông Minh Đức những điều tốt đẹp nhất. Mong ông luôn vui vẻ dưới mái trường này, bên bạn bè cùng lứa Gen 14. Chúc cho con đường học tập của ông luôn suôn sẻ, hy vọng ông sẽ vẫn luôn tích cực và mang lại nhiều năng lượng như cách ông đã làm với mọi người nhaa.\n\nChúc Quốc Khánh nhân ngày 19/11 luôn vui vẻ, hạnh phúc bên gia đình và có thật nhiều may mắn trên con đường học tập. Hy vọng ông sẽ không sai morat trầm trọng nữa và luôn dồi dào idea để có thật nhiều kỉ niệm với CLB và Gen 14 nhe."},{"from":"Thanh Ngọc","sign":"Người gom những điều rực rỡ","title":"Gửi Đức và Khánh","body":"Chúc Đức và Khánh có một ngày 19/11 thật vui vẻ nhaaa! Mong hai ông sẽ luôn giữ được màu sắc riêng của mình, không ngừng khám phá những điều mới mẻ, tìm thấy nhiều cơ hội để phát triển và có thật nhiều trải nghiệm đáng nhớ trong hành trình sắp tới. Hãy luôn tự tin, nhiệt huyết và ngày càng tỏa sáng theo cách rất riêng của mình nhaa. Cảm ơn hai ông vì là một nguồn năng lượng rất đáng yêu của Gen 14! 💝"},{"from":"Tường Mai","sign":"Người gửi chút dịu dàng","title":"Gửi hai cậu","body":"Chúc hai cậu có một ngày thật ý nghĩa. Mong cậu luôn vui vẻ, mạnh khỏe, ngày nào cũng năng động và luôn yêu đời. Hy vọng những điều tốt đẹp nhất sẽ đến với cậu. Mỗi ngày thức dậy, hãy luôn là một phiên bản tuyệt vời nhất của chính mình nhé! 💗"},{"from":"Ngọc Oanh","sign":"Người tiếp sức cho hành trình PR & ME","title":"Gửi hai người bạn đáng yêu","body":"Nhân dịp 19/11, chúc hai người bạn đáng yêu của chúng ta luôn vui vẻ, hạnh phúc nha. Và hy vọng không chỉ trong dịp đặc biệt này mà mọi ngày của Đức và Khánh đều tràn đầy năng lượng, dồi dào ý tưởng để cùng chúng tớ đồng hành với PR & ME nhé!"},{"from":"Lê Hân","sign":"Người trao niềm vui nho nhỏ","title":"Gửi Minh Đức và Quốc Khánh","body":"Chúc hai bạn Minh Đức và Quốc Khánh có một ngày Quốc tế Nam giới 19/11 nhận được thật nhiều niềm vui, những điều tốt đẹp từ bạn bè, người thân và có thật nhiều kỉ niệm đáng nhớ nhaaaa! 🩷"},{"from":"Sông Hương","sign":"Chuyên gia gửi deadline đi nghỉ","title":"Gửi hai bạn nam của PR & ME","body":"Chúc hai bạn nam của PR & ME ngày 19/11 luôn vui vẻ, đẹp trai, học giỏi; deadline tự chạy, idea tự tới, công việc và học tập luôn suôn sẻ, thuận lợi nhenn! 🩷"},{"from":"Khánh Ngọc","sign":"Người viết những dòng tâm tình","title":"Một bức thư gửi Đức và Khánh","body":"Nhân ngày 19/11, xin gửi đến hai thành viên của PR & Making Event những lời chúc chân thành và tốt đẹp nhất. Chúc hai ông luôn giữ được sự tự tin, bản lĩnh và nhiệt huyết trên hành trình phía trước; luôn đủ can đảm để theo đuổi những điều mình yêu thích, đủ kiên trì để vượt qua những thử thách và đủ yêu thương để trân trọng chính bản thân mình. Mong rằng mỗi ngày trôi qua đều mang đến những trải nghiệm đáng quý, những cơ hội mới và thật nhiều lý do để tự hào về bản thân.\n\nĐặc biệt, chúc hai ông sẽ tiếp tục có thật nhiều dấu ấn đáng nhớ trong hành trình cùng PR & Making Event. Mong rằng những ý tưởng sẽ luôn được đón nhận, những kế hoạch sẽ diễn ra suôn sẻ và những chiếc deadline cũng sẽ đôi lần biết nghĩ cho con người. Hy vọng rằng sau tất cả, điều đọng lại vẫn là niềm vui và những kỷ niệm thật đẹp.\n\nHơn hết, mong hai ông luôn được là chính mình, tự tin với cá tính riêng, không ngần ngại thể hiện những điều mình tin tưởng và luôn được mọi người yêu quý, tôn trọng vì những giá trị mà bản thân mang lại. Bởi mỗi người đều có một cách riêng để tỏa sáng, và chẳng ai cần phải trở thành một phiên bản giống với bất kỳ ai khác.\n\nChúc hai ông có một ngày 19/11 thật ý nghĩa, luôn bình an, hạnh phúc và gặp được nhiều điều tử tế trên hành trình trưởng thành. Cảm ơn vì đã là một phần của tập thể này. Mong rằng chúng ta sẽ còn cùng nhau tạo nên thật nhiều điều đáng nhớ nhé. Happy Men's Day!"}];
 let currentLetter=0;
 function openWishBook(){document.getElementById('bookCover').hidden=true;document.getElementById('bookInside').hidden=false;renderLetter();burst(innerWidth/2,innerHeight*.58,30)}
+function openCurrentLetter(){
+ const gate=document.getElementById('sealedLetter'),page=document.getElementById('letterPage');
+ gate.hidden=true;page.hidden=false;
+ const m=wishes[currentLetter];
+ page.querySelector('.page-deco span').textContent='THƯ TỪ '+m.from.toUpperCase();
+ burst(innerWidth/2,innerHeight*.58,24);
+}
 function renderLetter(){
  const m=wishes[currentLetter];
+ const page=document.getElementById('letterPage');
+ page.hidden=true;
+ document.getElementById('sealedLetter').hidden=false;
+ page.dataset.color=String(currentLetter);
  document.getElementById('pageCount').textContent=String(currentLetter+1).padStart(2,'0')+' / '+String(wishes.length).padStart(2,'0');
  document.getElementById('messageTitle').textContent=m.title;
  document.getElementById('messageBody').textContent=m.body;
@@ -111,7 +153,7 @@ function renderLetter(){
  document.getElementById('prevLetter').disabled=currentLetter===0;
  document.getElementById('nextLetter').disabled=currentLetter===wishes.length-1;
  document.getElementById('pageDots').textContent=wishes.map((_,i)=>i===currentLetter?'●':'○').join(' ');
- const page=document.getElementById('letterPage');page.style.animation='none';void page.offsetWidth;page.style.animation='';
+ page.style.animation='none';void page.offsetWidth;page.style.animation='';
 }
 function turnLetter(step){currentLetter=Math.max(0,Math.min(wishes.length-1,currentLetter+step));renderLetter();burst(innerWidth/2,innerHeight*.58,9)}
 renderLetter();
